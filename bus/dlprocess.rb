@@ -4,7 +4,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'fastercsv'
-require 'activesupport' #Time.parse
+require 'active_support' #Time.parse
 
 URL='http://nswbusdata.info/ptipslivedata/getptipslivedata?filename=ptipslivedata.zip'
 
