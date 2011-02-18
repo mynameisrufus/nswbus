@@ -24,7 +24,7 @@ def xmlconvert(file)
     f.puts 'COPY ' + filename.split('/')[1] + ' FROM STDIN WITH CSV HEADER;'
   end
   FasterCSV.open(sqlfile, 'a', :force_quotes => true) do |csv|
-    if file =~ /vechicles/
+    if file =~ /vehicles/
       xpath = xml.xpath('//vehicle')
       puts xpath.length
       csv.add_row xpath.first.map {|name, val| name.downcase} #Header
