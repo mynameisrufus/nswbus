@@ -16,8 +16,8 @@
   %span#longitude Longitude
   %p#link
 - @stops.each do |stop_description|
-  %link
+  %link.stop
     %p= stop_description.tsndescription
     %p
       - stop_description.stops.each do |stop|
-        = stop.routename
+        %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename

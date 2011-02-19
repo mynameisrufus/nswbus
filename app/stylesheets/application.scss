@@ -7,6 +7,10 @@ body {
 a {
   color: #FFFFFF;
   text-decoration:none;
+  &.stop {
+    p {
+      font-size: 150%;}
+  }
 }
 @media all and (max-device-width: 480px){
   body{
