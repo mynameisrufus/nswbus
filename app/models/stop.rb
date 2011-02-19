@@ -1,5 +1,5 @@
 class Stop < ActiveRecord::Base
-  has_many :vehicles, :foriegn_key => "vehicleid"
+  has_many :vehicles, :foreign_key => "vehicleid"
 
   extend Importer
 
