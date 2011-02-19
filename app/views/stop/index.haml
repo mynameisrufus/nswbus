@@ -1,23 +1,25 @@
 %script 
-  
+  function geolocate() {
   var latitude, longitude = 0;
   navigator.geolocation.getCurrentPosition(function(position) {
   latitude = position.coords.latitude; longitude = position.coords.longitude;
+  alert(latitude, longitude);
   document.getElementById('latitude').innerHTML = latitude;
   document.getElementById('longitude').innerHTML = longitude;
   document.getElementById('link').innerHTML = 
   "<a href=\"/stop/in_region?lat=" + latitude + "&long=" + longitude + "\">Show stops near me</a>"
   })
+  }
+  
+%h2 Find a bus stop
 
-%h2 Bus Stops
-%p
-  Your position is :
-  %span#latitude Latitude
-  %span#longitude Longitude
-  %p#link
-- @stops.each do |stop_description|
-  %link.stop
-    %p= stop_description.tsndescription
-    %p
-      - stop_description.stops.each do |stop|
-        %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
+#container
+  #left
+    %h3 Show me stops near my location
+    %a{:href => "#", :onclick => "geolocate()"}Locate me
+  #right
+    %h3 Let me search for stops
+    %form{:action => "stop/search", :method => "post"}
+      %input{:type => "hidden", :name => "authenticity_token", :value => form_authenticity_token}
+      %label{:for => "search"} "Stop name:"
+      %input{:type => "text", :name => "search"}

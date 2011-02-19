@@ -30,3 +30,13 @@ a {
 
   header h1 {
     font-size: 1.6em; } }
+
+#container {
+  height: 100px; }
+
+#left {
+  float: left;
+  padding-right: 10px; }
+
+#right {
+  float: left; }

@@ -1,0 +1,23 @@
+%script 
+  var latitude, longitude = 0;
+  navigator.geolocation.getCurrentPosition(function(position) {
+  latitude = position.coords.latitude; longitude = position.coords.longitude;
+  document.getElementById('latitude').innerHTML = latitude;
+  document.getElementById('longitude').innerHTML = longitude;
+  document.getElementById('link').innerHTML = 
+  "<a href=\"/stop/in_region?lat=" + latitude + "&long=" + longitude + "\">Show stops near me</a>"
+  })
+
+%h2 Bus Stops
+%p
+  Your position is :
+  %span#latitude Latitude
+  %span#longitude Longitude
+  %p#link
+- @stops.each do |stop_description|
+  %link.stop
+    %p= stop_description.tsndescription
+    %p
+      - stop_description.stops.each do |stop|
+        %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
+.
