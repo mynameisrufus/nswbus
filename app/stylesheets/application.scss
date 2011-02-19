@@ -9,16 +9,17 @@ a {
   text-decoration:none;
   display: block;
   background: url("/images/iPhoneArrow.png") no-repeat scroll right center transparent;
+  padding: 10px 0;
   &:hover {
     color: #dbe2e3;
   }
   &.stop {
-    padding: 15px 0px;
     p {
+      margin: 5px 0px; 
       font-size: 150%;
-      margin: 3px 0px;
       font-weight: bold;
       span {
+        margin-right: 10px;
         font-size: 90%;
       }
     }
@@ -34,6 +35,8 @@ span {
     font-size: 150%;
     font-family: "Courier New" , Courier , monospace ; 
     font-weight: bold;
+    border-bottom: 3px solid #333333;
+    margin-right: 5px;
   }
 }
 @media all and (max-device-width: 480px){

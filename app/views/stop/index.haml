@@ -9,13 +9,11 @@
   }
   
 %h2 Find a bus stop
-#container
-  #left
-    %h3 Show me stops near my location
-    %a{:href => "#", :onclick => "geolocate()"}Locate me
-  #right
-    %h3 Let me search for stops
-    %form{:action => "stop/search", :method => "post"}
-      %input{:type => "hidden", :name => "authenticity_token", :value => form_authenticity_token}
-      %label{:for => "search"} "Stop name:"
-      %input{:type => "text", :name => "search"}
+%h3 Show me stops near my location
+%a{:href => "#", :onclick => "geolocate()"}Locate me
+%h2 Or
+%h3 search for stops
+%form{:action => "stop/search", :method => "post"}
+  %input{:type => "hidden", :name => "authenticity_token", :value => form_authenticity_token}
+  %label{:for => "search"} "Stop name:"
+  %input{:type => "text", :name => "search"}

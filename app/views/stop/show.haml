@@ -21,7 +21,6 @@
     %p= info[:destination]
     %p
       - info[:times].map{|t| t.strftime("%H:%M")}.each do |happy_time|
-        %span.info
-          = happy_time
+        %span.info= happy_time
 %h2
   = link_to "Back", in_region_path(:lat => session[:latlong][0], :long => session[:latlong][1])

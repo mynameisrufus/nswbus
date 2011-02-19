@@ -8,17 +8,17 @@ a {
   color: #FFFFFF;
   text-decoration: none;
   display: block;
-  background: url("/images/iPhoneArrow.png") no-repeat scroll right center transparent; }
+  background: url("/images/iPhoneArrow.png") no-repeat scroll right center transparent;
+  padding: 10px 0; }
   a:hover {
     color: #dbe2e3; }
-  a.stop {
-    padding: 15px 0px; }
-    a.stop p {
-      font-size: 150%;
-      margin: 3px 0px;
-      font-weight: bold; }
-      a.stop p span {
-        font-size: 90%; }
+  a.stop p {
+    margin: 5px 0px;
+    font-size: 150%;
+    font-weight: bold; }
+    a.stop p span {
+      margin-right: 10px;
+      font-size: 90%; }
 
 span.routename {
   font-size: 250%;
@@ -26,7 +26,9 @@ span.routename {
 span.info {
   font-size: 150%;
   font-family: "Courier New" , Courier , monospace;
-  font-weight: bold; }
+  font-weight: bold;
+  border-bottom: 3px solid #333333;
+  margin-right: 5px; }
 
 @media all and (max-device-width: 480px) {
   body {
