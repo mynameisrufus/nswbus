@@ -17,12 +17,10 @@ class Stop < ActiveRecord::Base
     xml = Nokogiri.parse(File.read(file))
     transaction do
       connection.execute("TRUNCATE TABLE #{table_name};")
-      headers = xml.xpath('//Arrival').first.map {|name, val| name.downcase} #Header
-      headers.unshift "tsn"
-      stops = xml.xpath('//Stop')
-      stops.each do |stop|
-        tsn = stop.attribute('TSN').value
-        stop.children.each do |list|
+      xpath = xml.xpath('//Stop')
+      xpath.each do |element|
+        tsn = element.attribute('TSN').value
+        element.children.each do |list|
           list.children.each do |arr|
             attrs = {}
             arr.each do |a|
