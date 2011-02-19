@@ -14,7 +14,12 @@ class StopController < ApplicationController
 
   def search
     name = params[:search]
-    @stop_descriptions = StopDescription.where("tsndescription ilike ?", "%#{name}%")
+    @stop_descriptions = StopDescription.where("tsndescription ilike ?", "%#{name}%").joins("
+      INNER JOIN (
+        SELECT tsn, count(*) AS services FROM #{Stop.table_name}
+        GROUP BY tsn
+      ) AS t1 ON t1.tsn = #{StopDescription.table_name}.tsn"
+    ).order("services DESC")
     render :stops
   end
 
