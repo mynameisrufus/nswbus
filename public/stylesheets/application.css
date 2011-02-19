@@ -66,3 +66,14 @@ span.info {
 
 #map {
   float: right; }
+
+#topright {
+  white-space: nowrap;
+  float: right; }
+
+h2.top {
+  white-space: nowrap;
+  display: inline; }
+
+p.tiny {
+  text-size: 10pt; }

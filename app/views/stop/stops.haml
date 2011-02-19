@@ -1,4 +1,9 @@
 %h2 Bus Stops
+%form{:action => "stop/search", :method => "post"}
+  %input{:type => "hidden", :name => "authenticity_token", :value => form_authenticity_token}
+  %label{:for => "search"} Search for stop:
+  %input{:type => "text", :name => "search"}
+
 #container
   #map{:style => "width: 500px; height: 500px;"}
 
@@ -15,7 +20,7 @@
         ="var tsn#{sd.tsn} = new google.maps.LatLng(#{sd.latitude}, #{sd.longitude});"
         ="var marker#{sd.tsn} = new google.maps.Marker({position: tsn#{sd.tsn}, map: map, title: '#{sd.tsndescription}'});"
         ="google.maps.event.addListener(marker#{sd.tsn}, 'click', function() {"
-        ="window.location = 'http://localhost:3000/stop/show/#{sd.id}' });" 
+        ="$.ajax({url: 'stop/show/#{sd.id}', success: function(data){ document.getElementById('text').innerHTML = data;} }); })" 
       %a.stop{:href => show_stop_path(sd.id)}
         %p= sd.tsndescription
         %p
@@ -23,5 +28,3 @@
             %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
 
 
-%h2
-  = link_to "Home", root_path
