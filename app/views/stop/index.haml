@@ -6,7 +6,7 @@
   document.getElementById('latitude').innerHTML = latitude;
   document.getElementById('longitude').innerHTML = longitude;
   document.getElementById('link').innerHTML = 
-  "<a href=\"/in_region/?lat=" + latitude + "&long=" + longitude + "\">Show stops near me</a>"
+  "<a href=\"/stop/in_region/?lat=" + latitude + "&long=" + longitude + "\">Show stops near me</a>"
   })
 
 %h2 Bus Stops
@@ -18,6 +18,7 @@
 %table
   - @stops.each do |stop|
     %tr
-      %td=stop.tsndescription
+      %td
+        =link_to stop.tsndescription, ("../../stop/show/"+stop.tsn.to_s)
       %td=stop.latitude
       %td=stop.longitude

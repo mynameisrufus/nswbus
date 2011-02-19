@@ -1,0 +1,7 @@
+%h1="Arrivals for #{@stop.tsndescription}"
+%table
+  -@arrivals.each do |arrival|
+    %tr
+      %td= arrival.routename
+      %td= arrival.destination
+      %td= arrival.arrivaltime
