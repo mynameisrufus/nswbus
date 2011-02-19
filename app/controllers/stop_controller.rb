@@ -12,6 +12,12 @@ class StopController < ApplicationController
     @stops = StopDescription.limit(10)
   end
 
+  def search
+    name = params[:search]
+    @stops = StopDescription.where("tsndescription like ?", "%#{name}%")
+    render :stops
+  end
+
   def in_region()
     bounds = region(latlong)
     # NOTE Southern Hemisphere -33 lat, opposite comparator for negative
@@ -20,12 +26,12 @@ class StopController < ApplicationController
                               where("latitude  < ?", bounds[1].lat).
                               where("longitude < ?", bounds[1].long).
                               limit(10)
-    render :index
+    render :stops
   end
 
   def show()
     tsn = params[:id]
-    @arrivals = Stop.join(:vehicles).where("tsn = ?", tsn)
+    @arrivals = Stop.includes(:vehicles).where("tsn = ?", tsn)
     @stop = StopDescription.where("tsn = ?", tsn).first
     render :show
   end
