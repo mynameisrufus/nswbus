@@ -1,6 +1,6 @@
 class Stop < ActiveRecord::Base
-  has_many :vehicles, :foreign_key => "vehicleid"
-  has_one :stop_description, :foreign_key => "tsn"
+  belongs_to :stop_description, :foreign_key => "tsn", :primary_key => "tsn"
+  has_one :vehicle, :foreign_key => "vehicleid", :primary_key => "vehicleid"
 
   extend Importer
 
