@@ -1,14 +1,14 @@
 DROP TABLE IF EXISTS stopdescriptions;
 CREATE TABLE stopdescriptions (
-  latitude float,
   longitude float,
+  latitude float,
   tsndescription varchar(255),
   tsn integer primary key
 );
 
 DROP TABLE IF EXISTS stops;
 CREATE TABLE stops (
-  tsn integer primary key,
+  tsn integer,
   organisation varchar(255), --Canditate for normalisation
   destination varchar(255),
   vehicleid integer NULL,
@@ -29,4 +29,4 @@ CREATE TABLE vehicles (
   routename varchar(255), --Candidate for normalisation
   servicedescription varchar(255), --Candidate for normalisation
   organisation varchar(255) --Candidate for normalisation
-)
+);
