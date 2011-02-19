@@ -17,7 +17,14 @@ class StopDescription < ActiveRecord::Base
     xml = Nokogiri.parse(File.read(file))
     transaction do
       connection.execute("TRUNCATE TABLE #{table_name};")
-      #create!
+      xpath = xml.xpath('//stop')
+      xpath.each do |element|
+        attrs = {}
+        element.each do |a|
+          attrs.merge! a.first.downcase.to_sym => (a.last == "" ? nil : a.last)
+        end
+        create! attrs
+      end
     end
   end
 end
