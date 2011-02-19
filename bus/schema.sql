@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS stopdescriptions;
 CREATE TABLE stopdescriptions (
-  tsn integer primary key,
   latitude float,
   longitude float,
-  tsndescription varchar(255)
+  tsndescription varchar(255),
+  tsn integer primary key
 );
 
 DROP TABLE IF EXISTS stops;
