@@ -35,8 +35,16 @@ span {
     font-size: 150%;
     font-family: "Courier New" , Courier , monospace ; 
     font-weight: bold;
-    border-bottom: 3px solid #333333;
     margin-right: 5px;
+  }
+  &.ontime {
+    border-bottom: 3px solid #333333;
+  }
+  &.late {
+    border-bottom: 3px solid #ff2a2a;
+  }
+  &.early {
+    border-bottom: 3px solid #37c871;
   }
 }
 @media all and (max-device-width: 480px){
@@ -62,5 +70,7 @@ span {
 #container {height: 500px;}
 #left      {float:left; padding-right:10px}
 #right     {float:left;}
-#text      {float:left;}
+#text      {
+  display:block;
+}
 #max       {float:left;}

@@ -8,12 +8,19 @@
   })
   }
   
-%h2 Find a bus stop
+%h2
+  WMB
+  %sub
+    (wheres my bus?)
+%p
+  WMB lets you see the upcomming arrival times for busses, just find your bus stop and we will show you where you bus is in real time.
+  
 %h3
-  %a{:href => "#", :onclick => "geolocate()"}Locate me
-%h2 Or
-%h3 search for stops
-%form{:action => "stop/search", :method => "post"}
-  %input{:type => "hidden", :name => "authenticity_token", :value => form_authenticity_token}
-  %label{:for => "search"} "Stop name:"
-  %input{:type => "text", :name => "search"}
+  %a{:href => "#", :onclick => "geolocate()"}
+    locate me
+%h2 OR
+%h3
+  %form{:action => "stop/search", :method => "post"}
+    %input{:type => "hidden", :name => "authenticity_token", :value => form_authenticity_token}
+    %label{:for => "search"} search for a stop:
+    %input{:type => "text", :name => "search"}
