@@ -13,7 +13,6 @@ class StopController < ApplicationController
   end
 
   def in_region()
-    latlong = [params[:lat].to_f, params[:long].to_f]
     bounds = region(latlong)
     # NOTE Southern Hemisphere -33 lat, opposite comparator for negative
     @stops = StopDescription.where("latitude  > ?", bounds[0].lat).
@@ -26,7 +25,7 @@ class StopController < ApplicationController
 
   def show()
     tsn = params[:id]
-    @arrivals = Stops.where("tsn = ?", tsn)
+    @arrivals = Stop.where("tsn = ?", tsn)
     @stop = StopDescription.where("tsn = ?", tsn).first
     render :show
   end
@@ -35,5 +34,14 @@ class StopController < ApplicationController
   def region(latlong)
     return [[latlong.lat - LATLONG_OFFSET, latlong.long - LATLONG_OFFSET],
             [latlong.lat + LATLONG_OFFSET, latlong.long + LATLONG_OFFSET]]
+  end
+
+  def latlong
+    if params[:lat].present? && params[:long].present?
+      session[:latlong] = [params[:lat].to_f, params[:long].to_f]
+      session[:latlong]
+    elsif session[:latlong].present?
+      session[:latlong]
+    end
   end
 end
