@@ -14,7 +14,7 @@ class StopController < ApplicationController
 
   def search
     name = params[:search]
-    @stop_descriptions = StopDescription.where("tsndescription like ?", "%#{name}%")
+    @stop_descriptions = StopDescription.where("tsndescription ilike ?", "%#{name}%")
     render :stops
   end
 
