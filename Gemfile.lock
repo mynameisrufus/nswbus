@@ -30,11 +30,13 @@ GEM
     activesupport (3.0.3)
     arel (2.0.8)
     builder (2.1.2)
+    diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     fastercsv (1.5.4)
     haml (3.0.25)
     i18n (0.5.0)
+    machinist (2.0.0.beta2)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -63,6 +65,19 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    rspec (2.5.0)
+      rspec-core (~> 2.5.0)
+      rspec-expectations (~> 2.5.0)
+      rspec-mocks (~> 2.5.0)
+    rspec-core (2.5.1)
+    rspec-expectations (2.5.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.5.0)
+    rspec-rails (2.5.0)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
+      rspec (~> 2.5.0)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -74,6 +89,8 @@ PLATFORMS
 DEPENDENCIES
   fastercsv
   haml
+  machinist (= 2.0.0.beta2)
   nokogiri
   pg
   rails (= 3.0.3)
+  rspec-rails

@@ -1,10 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
-require File.expand_path(File.dirname(__FILE__) + "/../../bus/dlprocess")
 
-task :download do
-  download
-end
+namespace :download do
+  task :stops do
+    Stop.download
+  end
 
-task :xmlconvert do
-  xmlconvert
+  task :vehicles do
+    Vehicle.download
+  end
+
+  task :stop_descriptions do
+    StopDescription.download
+  end
 end
