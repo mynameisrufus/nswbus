@@ -1,4 +1,6 @@
 class Vehicle < ActiveRecord::Base
+  belongs_to :stop, :foriegn_key => "vehicleid"
+
   extend Importer
   
   def self.url
