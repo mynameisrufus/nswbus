@@ -1,23 +1,40 @@
-%script 
-  var latitude, longitude = 0;
-  navigator.geolocation.getCurrentPosition(function(position) {
-  latitude = position.coords.latitude; longitude = position.coords.longitude;
-  document.getElementById('latitude').innerHTML = latitude;
-  document.getElementById('longitude').innerHTML = longitude;
-  document.getElementById('link').innerHTML = 
-  "<a href=\"/stop/in_region?lat=" + latitude + "&long=" + longitude + "\">Show stops near me</a>"
-  })
-
 %h2 Bus Stops
-%p
-  Your position is :
-  %span#latitude Latitude
-  %span#longitude Longitude
-  %p#link
-- @stops.each do |stop_description|
-  %link.stop
-    %p= stop_description.tsndescription
+#container
+  #map{:style => "width: 500px; height: 500px;"}
+
+  %script
+    ="var latlng = new google.maps.LatLng(#{session[:latlong][0]}, #{session[:latlong][1]});"
+    var myOptions = { zoom: 14, center: latlng, 
+    mapTypeId: google.maps.MapTypeId.ROADMAP };
+    var map = new google.maps.Map(document.getElementById("map"), 
+    myOptions);
+
+  #text
     %p
-      - stop_description.stops.each do |stop|
-        %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
-.
+      Your position is :
+      %span#latitude Latitude
+      %span#longitude Longitude
+      %p#link
+    - @stops.each do |sd|
+      %link.stop
+        %p= sd.tsndescription
+        %p= sd.latitude
+        %p= sd.longitude
+        %script
+          ="var tsn#{sd.tsn} = new google.maps.LatLng(#{sd.latitude}, #{stop_description.longitude});"
+          ="var marker = new google.maps.Marker({position: tsn#{sd.tsn}, map: map, title: '#{sd.tsndescription}'});"
+          ="google.maps.event.addListener(marker)"
+          
+  google.maps.event.addListener(marker, 'click', function() {
+    map.setZoom(8);
+  });
+
+        %p
+          - stop_description.stops.each do |stop|
+            %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
+
+
+%script
+  ="var latlong = #{session[:latlong].inspect};"
+  document.getElementById('latitude').innerHTML = latlong[0];
+  document.getElementById('longitude').innerHTML = latlong[1];

@@ -32,11 +32,17 @@ a {
     font-size: 1.6em; } }
 
 #container {
-  height: 100px; }
+  height: 500px; }
 
 #left {
   float: left;
   padding-right: 10px; }
 
 #right {
+  float: left; }
+
+#text {
+  float: left; }
+
+#max {
   float: left; }
