@@ -26,7 +26,7 @@ class StopController < ApplicationController
 
   def show()
     tsn = params[:id]
-    @arrivals = Stops.where("tsn = ?", tsn)
+    @arrivals = Stop.where("tsn = ?", tsn)
     @stop = StopDescription.where("tsn = ?", tsn).first
     render :show
   end
