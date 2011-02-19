@@ -4,7 +4,7 @@ module Importer
   end
 
   def time
-    Time.now.strftime('%F-%H-%M')
+    Time.now.strftime('%F-%H-%M-%S')
   end
 
   def download

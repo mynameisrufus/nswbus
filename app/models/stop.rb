@@ -1,4 +1,6 @@
 class Stop < ActiveRecord::Base
+  has_many :vehicles, :foriegn_key => "vehicleid"
+
   extend Importer
 
   def self.url
