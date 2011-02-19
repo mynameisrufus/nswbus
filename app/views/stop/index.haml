@@ -15,9 +15,9 @@
   %span#latitude Latitude
   %span#longitude Longitude
   %p#link
-- @stops.each do |stop|
+- @stops.each do |stop_description|
   %link
-    = stop.tsndescription
-    - stop.vehicles.each do |vehicle|
-      %span
-        = vehicle.routename
+    %p= stop_description.tsndescription
+    %p
+      - stop_description.stops.each do |stop|
+        = stop.routename
