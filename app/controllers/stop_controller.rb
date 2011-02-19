@@ -18,22 +18,21 @@ class StopController < ApplicationController
     render :stops
   end
 
-  def in_region()
+  def in_region
     bounds = region(latlong)
     # NOTE Southern Hemisphere -33 lat, opposite comparator for negative
-    @stops = StopDescription.where("latitude  > ?", bounds[0].lat).
-                              where("longitude > ?", bounds[0].long).
-                              where("latitude  < ?", bounds[1].lat).
-                              where("longitude < ?", bounds[1].long).
-                              limit(10)
+    @stop_descriptions = StopDescription\
+      .where("latitude  > ?", bounds[0].lat)\
+      .where("longitude > ?", bounds[0].long)\
+      .where("latitude  < ?", bounds[1].lat)\
+      .where("longitude < ?", bounds[1].long)\
+      .limit(5)
     render :stops
   end
 
-  def show()
-    tsn = params[:id]
-    @arrivals = Stop.includes(:vehicles).where("tsn = ?", tsn)
-    @stop = StopDescription.where("tsn = ?", tsn).first
-    render :show
+  def show
+    @stop_description = StopDescription.find(params[:id])
+    @stops            = Stop.includes(:vehicle).where(:tsn => @stop_description.tsn)
   end
 
   private

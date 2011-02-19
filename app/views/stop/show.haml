@@ -1,8 +1,27 @@
-%h1="Arrivals for #{@stop.tsndescription}"
-%table
-  -@arrivals.each do |arrival|
-    %tr
-      %td= arrival.routename
-      %td= arrival.destination
-      %td= arrival.arrivaltime
-      %td= arrival.vehicles.first.latitude rescue ""
+%h2
+  Arrivals for
+  = @stop_description.tsndescription
+:ruby
+  sorted_stops = {}
+  @stops.map do |stop|
+    if sorted_stops.keys.include?(stop.routename)
+      sorted_stops[stop.routename][:times] << stop.arrivaltime
+    else
+      sorted_stops[stop.routename] = {
+        :times       => [stop.arrivaltime],
+        :destination => stop.destination
+      }
+    end
+  end
+.show
+  -sorted_stops.each do |routename, info|
+    %p
+      %span.routename{:style => "color: #{route_colour(routename)};"}
+        = routename
+    %p= info[:destination]
+    %p
+      - info[:times].map{|t| t.strftime("%H:%M")}.each do |happy_time|
+        %span.info
+          = happy_time
+%h2
+  = link_to "Back", in_region_path(:lat => session[:latlong][0], :long => session[:latlong][1])

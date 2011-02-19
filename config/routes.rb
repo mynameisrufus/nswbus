@@ -59,4 +59,5 @@ Nswbus::Application.routes.draw do
   
   match 'stop' => 'stop#index', :as => :stop
   match 'stop/in_region' => 'stop#in_region', :as => :in_region
+  match 'stop/show/:id' => 'stop#show', :as => :show_stop
 end

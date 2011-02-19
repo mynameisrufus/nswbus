@@ -9,15 +9,12 @@
   })
 
 %h2 Bus Stops
-%p
-  Your position is :
-  %span#latitude Latitude
-  %span#longitude Longitude
-  %p#link
-- @stops.each do |stop_description|
-  %link.stop
+- @stop_descriptions.each do |stop_description|
+  %a.stop{:href => show_stop_path(stop_description)}
     %p= stop_description.tsndescription
     %p
       - stop_description.stops.each do |stop|
-        %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
-.
+        %span{:style => "color: #{route_colour(stop.routename)};"}
+          = stop.routename
+%h2
+  = link_to "Home", root_path
