@@ -15,7 +15,7 @@
         ="var tsn#{sd.tsn} = new google.maps.LatLng(#{sd.latitude}, #{sd.longitude});"
         ="var marker#{sd.tsn} = new google.maps.Marker({position: tsn#{sd.tsn}, map: map, title: '#{sd.tsndescription}'});"
         ="google.maps.event.addListener(marker#{sd.tsn}, 'click', function() {"
-        ="window.location = 'http://localhost:3000/stop/show/#{sd.tsn}' });" 
+        ="window.location = 'http://localhost:3000/stop/show/#{sd.id}' });" 
       %a.stop
         = #{:href => show_stop_path(sd.id)}
         %p= sd.tsndescription
