@@ -21,10 +21,6 @@
         %p= sd.tsndescription
         %p
           - sd.stops.each do |stop|
-            %span{:style => "color: #{route_colour(stop.routename)};"}
-              = stop.routename
-        %p
-          - sd.stops.each do |stop|
             %span{:style => "color: #{route_colour(stop.routename)};"}= stop.routename
 
 
