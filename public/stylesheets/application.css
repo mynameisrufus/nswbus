@@ -67,7 +67,7 @@ span.early {
   float: left; }
 
 #text {
-  display: block; }
-
-#max {
   float: left; }
+
+#map {
+  float: right; }
