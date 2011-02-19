@@ -6,9 +6,27 @@ body {
 
 a {
   color: #FFFFFF;
-  text-decoration: none; }
-  a.stop p {
-    font-size: 150%; }
+  text-decoration: none;
+  display: block;
+  background: url("/images/iPhoneArrow.png") no-repeat scroll right center transparent; }
+  a:hover {
+    color: #dbe2e3; }
+  a.stop {
+    padding: 15px 0px; }
+    a.stop p {
+      font-size: 150%;
+      margin: 3px 0px;
+      font-weight: bold; }
+      a.stop p span {
+        font-size: 90%; }
+
+span.routename {
+  font-size: 250%;
+  font-weight: bold; }
+span.info {
+  font-size: 150%;
+  font-family: "Courier New" , Courier , monospace;
+  font-weight: bold; }
 
 @media all and (max-device-width: 480px) {
   body {
