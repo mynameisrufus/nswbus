@@ -1,0 +1,29 @@
+body {
+  background-color: #333333;
+  font-family: Arial, Verdana, sans-serif;
+  color: #FFFFFF;
+  height: 100%; }
+
+a {
+  color: #FFFFFF;
+  text-decoration:none;
+}
+@media all and (max-device-width: 480px){
+  body{
+    font: 43.34px Arial, Verdana, sans-serif;
+    padding:5px; }
+  #content {
+    width: 100%; }
+  .experience {
+    img {
+      display: none; } }
+  input, button, textarea, select {
+    font-size: 1.5em; }
+  ul {
+    &.nav {
+      a {
+        font-size: 1.5em;
+        padding: 30px; } } }
+  header {
+    h1 {
+      font-size: 1.6em; } } }

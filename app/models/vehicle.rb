@@ -1,5 +1,5 @@
 class Vehicle < ActiveRecord::Base
-  belongs_to :stop, :foriegn_key => "vehicleid"
+  belongs_to :stop, :foreign_key => "vehicleid"
 
   extend Importer
   
@@ -28,5 +28,9 @@ class Vehicle < ActiveRecord::Base
         create! attrs
       end
     end
+  end
+
+  def colour
+
   end
 end

@@ -1,4 +1,7 @@
 class StopDescription < ActiveRecord::Base
+  has_one :stop, :foreign_key => "tsn"
+  has_many :vehicles, :through => :stop
+
   extend Importer
   
   def self.url
