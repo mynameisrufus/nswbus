@@ -14,7 +14,7 @@
       status = case
       when s_time && stop.arrivaltime > s_time
         "late"
-      when s_time && stop.arrivaltime < (s_time - 5.minutes)
+      when s_time && stop.arrivaltime < (s_time - 2.minutes)
         "early"
       else
         "ontime"
