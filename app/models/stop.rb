@@ -2,6 +2,17 @@ class Stop < ActiveRecord::Base
   belongs_to :stop_description, :foreign_key => "tsn", :primary_key => "tsn"
   has_one :vehicle, :foreign_key => "vehicleid", :primary_key => "vehicleid"
 
+  def route_colour
+    case
+    when self.routename =~ /m/i
+      "#d40000"
+    when self.routename =~ /l/i
+      "#5555ff"
+    else
+      "#87cdde"
+    end
+  end
+
   def self.xml
     'stops.xml'
   end
