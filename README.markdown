@@ -2,7 +2,7 @@
 
 ## TODO
 
-* directly search for a bus ie. M20
+* directly search for a bus ie. M20 within x distance
 * directly search for a tsn (bus stop)
 
 ### Compile scss
