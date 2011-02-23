@@ -1,21 +1,12 @@
 class Vehicle < ActiveRecord::Base
   belongs_to :stop, :foreign_key => "vehicleid", :primary_key => "vehicleid"
   
-  extend Importer
-  
-  def self.url
-    'http://nswbusdata.info/ptipslivedata/getptipslivedata'
-  end
-
-  def self.zip
-    'ptipslivedata'
-  end
-
   def self.xml
-    'vehicles'
+    'vehicles.xml'
   end
 
-  def self.update(file)
+  def self.update!(dir)
+    file = File.join(dir, xml)
     xml = Nokogiri.parse(File.read(file))
     transaction do
       connection.execute("TRUNCATE TABLE #{table_name};")

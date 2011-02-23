@@ -1,21 +1,12 @@
 class StopDescription < ActiveRecord::Base
   has_many :stops, :foreign_key => "tsn", :primary_key => "tsn"
-
-  extend Importer
   
-  def self.url
-    'http://nswbusdata.info/ptipslivedata/getptipslivedata'
-  end
-
-  def self.zip
-    'stopdescriptions'
-  end
-
   def self.xml
-    'stopdescription'
+    'stopdescription.xml'
   end
 
-  def self.update(file)
+  def self.update!(dir)
+    file = File.join(dir, xml)
     xml = Nokogiri.parse(File.read(file))
     transaction do
       connection.execute("TRUNCATE TABLE #{table_name};")
