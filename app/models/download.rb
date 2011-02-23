@@ -26,4 +26,15 @@ class Download
     `unzip #{dir}/#{zip} -d #{dir}`
     dir
   end
+
+  def self.update(dir)
+    ActiveRecord::Base.transaction do
+      [StopDescription, Stop, Vehicle].each do |model_class|
+        model_class.truncate
+        File.open(File.join(dir, model_class.filename)) do |file|
+          Nokogiri::XML::SAX::Parser.new(model_class::Document.new).parse(file)
+        end
+      end
+    end
+  end
 end

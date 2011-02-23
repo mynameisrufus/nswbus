@@ -1,31 +1,25 @@
 class Stop < ActiveRecord::Base
+  class Document < Nokogiri::XML::SAX::Document
+    def start_element(name, attrs = [])
+      attributes = Hash[attrs]
+      case name
+      when "Stop"
+        @tsn = attributes["TSN"]
+      when "Arrival"
+        attributes["tsn"] = @tsn
+        attributes["vehicleid"] = attributes.delete("vehicleID")
+        attributes["realtime"] = attributes.delete("realTime")
+        attributes["arrivaltime"] = Time.at(attributes.delete("arrivalTime").to_i)
+        attributes["routename"] = attributes.delete("routeName")
+        Stop.create(attributes)
+      end
+    end
+  end
+
   belongs_to :stop_description, :foreign_key => "tsn", :primary_key => "tsn"
   has_one :vehicle, :foreign_key => "vehicleid", :primary_key => "vehicleid"
 
-  def self.xml
+  def self.filename
     'stops.xml'
-  end
-  
-  def self.update!(dir)
-    file = File.join(dir, xml)
-    xml = Nokogiri.parse(File.read(file))
-    transaction do
-      connection.execute("TRUNCATE TABLE #{table_name};")
-      xpath = xml.xpath('//Stop')
-      xpath.each do |element|
-        tsn = element.attribute('TSN').value
-        element.children.each do |list|
-          list.children.each do |arr|
-            attrs = {}
-            arr.each do |a|
-              attrs.merge! a.first.downcase.to_sym => (a.last == "" ? nil : a.last)
-            end
-            attrs.merge! :tsn => tsn
-            attrs[:arrivaltime] = Time.at(attrs[:arrivaltime].to_i) unless attrs[:arrivaltime].nil?
-            create! attrs
-          end
-        end
-      end
-    end
   end
 end
