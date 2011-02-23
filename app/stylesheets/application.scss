@@ -26,6 +26,11 @@ a {
   }
 }
 
+footer {
+  a {
+    display: inline;
+    text-decoration: underline; } }
+
 span {
   &.routename {
     font-size: 250%;

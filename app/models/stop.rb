@@ -22,4 +22,15 @@ class Stop < ActiveRecord::Base
   def self.filename
     'stops.xml'
   end
+
+  def route_colour
+    case
+    when self.routename =~ /m/i
+      "#d40000"
+    when self.routename =~ /l/i
+      "#5555ff"
+    else
+      "#87cdde"
+    end
+  end
 end

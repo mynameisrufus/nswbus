@@ -22,14 +22,15 @@
       sorted_stops[stop.routename] = {
         :times       => [stop.arrivaltime],
         :destination => stop.destination,
-        :status      => status
+        :status      => status,
+        :colour      => stop.route_colour
       }
     end
   end
 .show
   -sorted_stops.each do |routename, info|
     %p
-      %span.routename{:style => "color: #{route_colour(routename)};"}
+      %span.routename{:style => "color: #{info[:colour]};"}
         = routename
     %p= info[:destination]
     %p

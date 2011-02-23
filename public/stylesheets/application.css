@@ -20,6 +20,10 @@ a {
       margin-right: 10px;
       font-size: 90%; }
 
+footer a {
+  display: inline;
+  text-decoration: underline; }
+
 span.routename {
   font-size: 250%;
   font-weight: bold; }
