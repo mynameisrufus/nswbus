@@ -2,13 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 
 namespace :download do
   task :every_day do
-    dir = Download.stopdescriptions!
-    StopDescription.update!(dir)
+    Download.new do |downloader|
+      downloader.stopdescriptions!
+      downloader.update StopDescription
+    end
   end
   
   task :every_minute do
-    dir = Download.ptipslivedata!
-    Stop.update!(dir)
-    Vehicle.update!(dir)
+    Download.new do |downloader|
+      downloader.ptipslivedata!
+      downloader.update Stop, Vehicle
+    end
   end
 end

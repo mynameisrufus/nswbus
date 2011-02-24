@@ -7,10 +7,10 @@ class Stop < ActiveRecord::Base
         @tsn = attributes["TSN"]
       when "Arrival"
         attributes["tsn"] = @tsn
-        attributes["vehicleid"] = attributes.delete("vehicleID")
-        attributes["realtime"] = attributes.delete("realTime")
+        attributes["vehicleid"]   = attributes.delete("vehicleID")
+        attributes["realtime"]    = attributes.delete("realTime")
         attributes["arrivaltime"] = Time.at(attributes.delete("arrivalTime").to_i)
-        attributes["routename"] = attributes.delete("routeName")
+        attributes["routename"]   = attributes.delete("routeName")
         Stop.create(attributes)
       end
     end

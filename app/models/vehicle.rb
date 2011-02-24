@@ -1,13 +1,18 @@
 class Vehicle < ActiveRecord::Base
   class Document < Nokogiri::XML::SAX::Document
-    def initialize
-    end
-
     def start_element(name, attrs = [])
       if name == "vehicle"
         attributes = Hash[attrs]
-        attributes["tsn"] = attributes.delete("TSN")
-        StopDescription.create(attributes)
+        match_data = attributes["serviceDescription"].delete.match(/^([0-9]{2}:[0-9]{2}) - (.*)/)
+        
+        attributes["schedule"]           = match_data[1]
+        attributes["servicedescription"] = match_data[2]
+        attributes["vehicleid"]          = attributes.delete("vehicleID")
+        attributes["tripstatus"]         = attributes.delete("tripStatus")
+        attributes["routedirection"]     = attributes.delete("routeDirection")
+        attributes["routevariant"]       = attributes.delete("routeVariant")
+        attributes["routename"]          = attributes.delete("routeName")
+        Vehicle.create(attributes)
       end
     end
   end
@@ -16,9 +21,5 @@ class Vehicle < ActiveRecord::Base
   
   def self.filename
     'vehicles.xml'
-  end
-
-  def colour
-
   end
 end

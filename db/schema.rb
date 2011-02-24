@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20110219001859) do
     t.integer  "routedirection"
     t.integer  "routevariant"
     t.string   "routename"
+    t.time     "schedule"
     t.string   "servicedescription"
     t.string   "organisation"
     t.datetime "created_at"

@@ -2,9 +2,10 @@ class StopDescription < ActiveRecord::Base
   class Document < Nokogiri::XML::SAX::Document
     def start_element(name, attrs)
       if name == "stop"
-        attributes = Hash[attrs]
-        attributes["tsn"] = attributes.delete("TSN")
-        StopDescription.create(attributes)
+        attrs.each do |a|
+          a.first.downcase!
+        end
+        StopDescription.create(Hash[attrs])
       end
     end
   end

@@ -6,6 +6,8 @@ gem 'pg'
 gem 'haml'
 gem 'nokogiri'
 gem 'fastercsv'
+gem 'awesome_print'
+gem 'rubyzip'
 
 group :development, :test do
   gem 'capistrano'

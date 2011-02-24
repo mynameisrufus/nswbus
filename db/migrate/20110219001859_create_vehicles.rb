@@ -8,6 +8,7 @@ class CreateVehicles < ActiveRecord::Migration
       t.integer :routedirection
       t.integer :routevariant
       t.string :routename
+      t.time :schedule
       t.string :servicedescription
       t.string :organisation
 
