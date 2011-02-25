@@ -2,6 +2,8 @@ require 'open-uri'
 require 'zip/zip'
 
 class Download
+  attr_accessor :dir
+
   @@uri             = 'http://nswbusdata.info/ptipslivedata/getptipslivedata'
   @@ptipslivedata   = 'ptipslivedata.zip'
   @@stopdescription = 'stopdescriptions.zip'
@@ -53,7 +55,7 @@ class Download
     ActiveRecord::Base.transaction do
       model_classi.each do |model_class|
         model_class.truncate
-        File.open(File.join(@dir, model_class.filename)) do |file|
+        File.open(File.join(dir, model_class.filename)) do |file|
           Nokogiri::XML::SAX::Parser.new(model_class::Document.new).parse(file)
         end
       end

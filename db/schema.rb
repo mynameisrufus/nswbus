@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(:version => 20110219001859) do
     t.datetime "updated_at"
   end
 
+  add_index "stop_descriptions", ["latitude"], :name => "index_stop_descriptions_on_latitude"
+  add_index "stop_descriptions", ["longitude"], :name => "index_stop_descriptions_on_longitude"
+  add_index "stop_descriptions", ["tsn"], :name => "index_stop_descriptions_on_tsn"
+  add_index "stop_descriptions", ["tsndescription"], :name => "index_stop_descriptions_on_tsndescription"
+
   create_table "stops", :force => true do |t|
     t.integer  "tsn"
     t.string   "organisation"

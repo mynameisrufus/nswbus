@@ -6,4 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-Download.update("spec/fixtures")
+Download.new do |downloader|
+  downloader.dir = "spec/fixtures"
+  downloader.update StopDescription
+end

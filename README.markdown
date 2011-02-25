@@ -1,5 +1,7 @@
 ## NSW Bus App
 
+  rake db:nuke
+
 ## TODO
 
 * directly search for a bus ie. M20 within x distance

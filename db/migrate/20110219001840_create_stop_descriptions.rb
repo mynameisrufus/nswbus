@@ -8,6 +8,11 @@ class CreateStopDescriptions < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :stop_descriptions, :tsn
+    add_index :stop_descriptions, :latitude
+    add_index :stop_descriptions, :longitude
+    add_index :stop_descriptions, :tsndescription
   end
 
   def self.down
