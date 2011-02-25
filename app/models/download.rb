@@ -31,9 +31,12 @@ class Download
     FileUtils.mkdir_p @dir
     zip_path = File.join(@dir, zip)
     begin
-      out = open(zip_path, 'wb')
-      out.write(open("#{@@uri}?filename=#{zip}").read)
-      out.close
+      Timeout::timeout(20) {
+        open(zip_path, 'wb') do |f|
+          f.write(open("#{@@uri}?filename=#{zip}").read)
+          f.close
+        end
+      }
     rescue Timeout::Error => e
       STDERR.puts "Could not download #{zip} from #{@@uri} - #{e.to_s}"
       exit
