@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rack', '1.2.2'
+gem 'rails', '3.0.5'
 
 gem 'pg'
 gem 'haml'
