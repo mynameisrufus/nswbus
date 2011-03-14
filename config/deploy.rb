@@ -11,7 +11,7 @@ set :deploy_via, "remote_cache"
 
 set :unicorn_binary, "/usr/local/bin/unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
 
 role :web, domain
 role :app, domain
@@ -22,7 +22,7 @@ namespace :deploy do
     run "cd #{current_path} && #{try_sudo} #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
   end
   task :stop, :roles => :app, :except => { :no_release => true } do 
-    run "#{try_sudo} kill `cat #{unicorn_pid}`"
+  #  run "#{try_sudo} kill `cat #{unicorn_pid}`"
   end
   task :graceful_stop, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
@@ -38,8 +38,6 @@ end
 
 task :update_config, :roles => [:app] do
   run "cp -Rf #{shared_path}/config/* #{release_path}/config/"
-  run "ln -s #{shared_path}/tmp #{release_path}/tmp"
-  run "ln -s #{shared_path}/log#{release_path}/log"
 end
 
 after "deploy:update_code", :update_config
