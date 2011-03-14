@@ -6,9 +6,8 @@ set :scm, :git
 set :branch, "master"
 
 set :use_sudo, false
-set :user, "rails"
 set :runner, user
-set :domain, "203.25.171.42"
+set :domain, "203.17.62.137"
 set :deploy_via, "remote_cache"
 set :deploy_to, "~/www/#{application}"
 set :keep_releases, 2
