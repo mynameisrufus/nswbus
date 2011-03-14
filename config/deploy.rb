@@ -1,35 +1,45 @@
 require "bundler/capistrano"
 
-set :application, "nswbus"
-set :repository,  "git@github.com:mynameisrufus/nswbus.git"
-set :scm, :git
-set :branch, "master"
-
-set :use_sudo, false
-set :runner, user
+set :rails_env, "production"
+set :deploy_to, "~/www/nswbus"
 set :domain, "203.17.62.137"
+set :application, "nswbus"
+set :use_sudo, false
+set :scm, :git
+set :repository,  "git@github.com:mynameisrufus/nswbus.git"
 set :deploy_via, "remote_cache"
-set :deploy_to, "~/www/#{application}"
-set :keep_releases, 2
 
-ssh_options[:forward_agent] = true
-ssh_options[:paranoid] = false
-ssh_options[:user] = 'rails'
+set :unicorn_binary, "/usr/local/bin/unicorn"
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 role :web, domain
 role :app, domain
-role :db,  domain, :primary => true
+role :db, domain, :primary => true
 
 namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
+  task :start, :roles => :app, :except => { :no_release => true } do 
+    run "cd #{current_path} && #{try_sudo} #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
+  end
+  task :stop, :roles => :app, :except => { :no_release => true } do 
+    run "#{try_sudo} kill `cat #{unicorn_pid}`"
+  end
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
+  end
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
+  end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    stop
+    start
   end
 end
 
 task :update_config, :roles => [:app] do
   run "cp -Rf #{shared_path}/config/* #{release_path}/config/"
+  run "ln -s #{shared_path}/tmp #{release_path}/tmp"
+  run "ln -s #{shared_path}/log#{release_path}/log"
 end
 
 after "deploy:update_code", :update_config
