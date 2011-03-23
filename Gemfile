@@ -9,6 +9,7 @@ gem 'nokogiri'
 gem 'fastercsv'
 gem 'awesome_print'
 gem 'rubyzip'
+gem 'texticle', '1.0.3'
 
 group :development, :test do
   gem 'capistrano'

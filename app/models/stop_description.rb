@@ -12,6 +12,10 @@ class StopDescription < ActiveRecord::Base
 
   has_many :stops, :foreign_key => "tsn", :primary_key => "tsn"
 
+  index do
+    tsndescription
+  end
+
   def self.filename
     'stopdescription.xml'
   end

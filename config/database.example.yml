@@ -1,0 +1,10 @@
+development:
+  adapter: postgresql
+  database: nswbus
+
+test: &test
+  adapter: postgresql
+  database: nswbus_test
+
+cucumber:
+  <<: *test

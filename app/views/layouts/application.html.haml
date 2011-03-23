@@ -2,17 +2,9 @@
 %html
   %head
     %title NSW Bus Info (very beta)
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'
-    = javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false'
-    = javascript_include_tag 'application'
     = stylesheet_link_tag 'application'
     /[if IE]
       =javascript_include_tag 'http://html5shiv.googlecode.com/svn/trunk/html5.js'
     = csrf_meta_tag
   %body
     = yield
-  %footer
-    %sub
-      Generously hosted by
-      = link_to "Job Futures", "http://www.jobfutures.com.au/", :target => "_blank"
-      and made with love by the Sydney #roro community.

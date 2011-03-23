@@ -3,7 +3,7 @@ class Vehicle < ActiveRecord::Base
     def start_element(name, attrs = [])
       if name == "vehicle"
         attributes = Hash[attrs]
-        match_data = attributes["serviceDescription"].delete.match(/^([0-9]{2}:[0-9]{2}) - (.*)/)
+        match_data = attributes.delete("serviceDescription").match(/^([0-9]{2}:[0-9]{2}) - (.*)/)
         
         attributes["schedule"]           = match_data[1]
         attributes["servicedescription"] = match_data[2]

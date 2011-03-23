@@ -18,6 +18,11 @@ class Stop < ActiveRecord::Base
 
   belongs_to :stop_description, :foreign_key => "tsn", :primary_key => "tsn"
   has_one :vehicle, :foreign_key => "vehicleid", :primary_key => "vehicleid"
+  
+  index do
+    routename
+    destination
+  end
 
   def self.filename
     'stops.xml'
