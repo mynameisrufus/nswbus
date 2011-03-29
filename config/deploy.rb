@@ -1,5 +1,9 @@
 require "bundler/capistrano"
 
+ssh_options[:user] = 'rufus'
+ssh_options[:forward_agent] = true
+ssh_options[:paranoid] = false
+
 set :rails_env, "production"
 set :deploy_to, "~/www/nswbus"
 set :domain, "203.17.62.137"
@@ -22,7 +26,7 @@ namespace :deploy do
     run "cd #{current_path} && #{try_sudo} #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
   end
   task :stop, :roles => :app, :except => { :no_release => true } do 
-  #  run "#{try_sudo} kill `cat #{unicorn_pid}`"
+    run "#{try_sudo} kill `cat #{unicorn_pid}`"
   end
   task :graceful_stop, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
